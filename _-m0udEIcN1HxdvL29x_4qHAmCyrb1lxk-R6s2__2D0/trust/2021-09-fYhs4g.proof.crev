@@ -92,3 +92,19 @@ trust: medium
 7BF6PJW-RgPMj7AnFDVS062YqtIyU2J-NW6-KuRnCzTlifWf2ujboQlAVUHJVfazod_kiUDUN1QSBvLbl1UXAg
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: trust
+version: -1
+date: "2021-09-02T08:07:40.840712758+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+ids:
+  - id-type: crev
+    id: "-sApEowWcAS9J0R7aO18cghvhLBpuMhyeUuWQq_fits"
+    url: "https://github.com/HeroicKatora/crev-proofs"
+trust: medium
+----- SIGN CREV PROOF -----
+1Sl15gOjVLuGjd-ICOwfap74iqR7kdX1V6weq-ni1i_NwnsDj2cCqbu7X23bMDYTm0qUTIqEvRMTSWkhhlAMBw
+----- END CREV PROOF -----
+
