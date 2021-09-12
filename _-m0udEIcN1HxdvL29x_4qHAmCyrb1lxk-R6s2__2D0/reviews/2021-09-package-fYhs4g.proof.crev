@@ -34,3 +34,37 @@ comment: |-
 xT4m5wPLfFevXiri9wPSh4cGW-Gab_Fp_pAHZLOjjwMJTOnZmDsvI5qUlrY6MYHfKUBHGVC4xjow-8NBh9eACg
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-12T19:05:54.047570870+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+package:
+  source: "https://crates.io"
+  name: cryo
+  version: 0.2.4
+  revision: ddeccfba93bd2330d12699b842a8f47a78a50e13
+  digest: ixrb3aR4vmCN25TYgTC_WhykHaJepn2NZwOpLIQKzLM
+review:
+  thoroughness: high
+  understanding: high
+  rating: neutral
+advisories:
+  - ids:
+      - "https://github.com/yvt/cryo/commit/3cd529a8665063e98961e08b4df25d398d9bd4b5"
+    severity: medium
+    range: minor
+    comment: "This release fixes a soundness issue with the `cryo!` macro where, when\nused inside `async fn`, it allows safe code to circumvent the\ncompile-time lifetime checking, rendering the code vulnerable to a\nuse-after-free bug. The description about this issue can be found in the\nlatest version's [API documentation][1]. `cryo!` is still there but now\nmarked as deprecated to warn users about this issue.\n\n[1]: https://docs.rs/cryo/0.2.6/cryo/macro.cryo.html#safety"
+comment: |-
+  This is a self-review.
+  
+  After two soundness issues being fixed, this package should be more solid
+  than ever and devoid of any serious bugs. Nevertheless, I'm giving a neutral
+  rating to provide warning about any remaining, potentially unsound usage of
+  the now-deprecated `cryo!`.
+----- SIGN CREV PROOF -----
+lfi1WUxofPMC3Jgd2rkHliEvDoGaYDvsUaGATm5OxTDHi1CWnSrrSUwayFQMXVGhk5ZOgS73N4ffs7J3oFoSDA
+----- END CREV PROOF -----
+
