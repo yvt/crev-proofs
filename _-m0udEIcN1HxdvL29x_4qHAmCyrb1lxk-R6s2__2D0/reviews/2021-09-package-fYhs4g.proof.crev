@@ -68,3 +68,38 @@ comment: |-
 lfi1WUxofPMC3Jgd2rkHliEvDoGaYDvsUaGATm5OxTDHi1CWnSrrSUwayFQMXVGhk5ZOgS73N4ffs7J3oFoSDA
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-12T20:01:39.552214874+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: stable_deref_trait
+  version: 1.2.0
+  revision: 66f9d8a15b7209c45f58edee6c1b6bb497b7bd31
+  digest: nSByNb8Gm3mLQItFfk2LhBUfpeusoqcHbHxolGl6QoM
+review:
+  thoroughness: medium
+  understanding: high
+  rating: positive
+comment: |-
+  The sole purpose of this crate is define the two traits `StableDeref` and
+  `CloneStableDeref` and provide their implementations on built-in and standard
+  library types. These marker traits define requirements on the stability of
+  the `Deref` results of the ascribed type.
+  
+  The trait requirements are defined clearly. Although (to my knowledge) some
+  of the standard library types marked with these traits don't explicitly or
+  indirectly say in their documentation that the requirements specified by
+  these traits are guaranteed to be upheld for these types, it's correct for
+  the current version of Rust and any possible sane reimplementation of the
+  standard library, and one can reasonably expect that it will remain so in
+  future versions.
+----- SIGN CREV PROOF -----
+gWzzaLP9IOoi6PImlaklvTM0k2OU5hOASfjvpRjms8sEUdAGescSZkvQq1Z38uyQBx2qzieKqk_XbKCJehYcAg
+----- END CREV PROOF -----
+
