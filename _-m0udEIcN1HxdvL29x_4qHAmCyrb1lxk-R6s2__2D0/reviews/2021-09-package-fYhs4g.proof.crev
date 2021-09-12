@@ -103,3 +103,37 @@ comment: |-
 gWzzaLP9IOoi6PImlaklvTM0k2OU5hOASfjvpRjms8sEUdAGescSZkvQq1Z38uyQBx2qzieKqk_XbKCJehYcAg
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-12T20:49:30.199229014+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: memory_units
+  version: 0.4.0
+  digest: ktE4A0aEGyiKNRxUUdd8CCmUnkC_VC8HOwuXBomYNZE
+review:
+  thoroughness: medium
+  understanding: high
+  rating: neutral
+comment: |-
+  This crate is sound - It includes no `unsafe` blocks and performs no
+  unexpected access to external environments. It has no build scripts.
+  
+  The `round_up_to` method provided by this crate does not perform overflow
+  checks nor describe its overflow behaviors. If the downstream crates don't
+  handle this condition correctly, it might lead to a vulnerability similar to
+  [BadAlloc][1].
+  
+  This crate also assumes the compilation target's page size is 4096 bytes,
+  which is not universal as exemplified by Apple Arm platforms.
+  
+  [1]: https://msrc-blog.microsoft.com/2021/04/29/badalloc-memory-allocation-vulnerabilities-could-affect-wide-range-of-iot-and-ot-devices-in-industrial-medical-and-enterprise-networks/
+----- SIGN CREV PROOF -----
+Rmi9P4beQyCVeQb6yGIpVgf1jXlObpdaWpMed0qeCEmHkRG17PHH2QXp29NZEe1uJcg6aVhcPEK-AssMHjjjAQ
+----- END CREV PROOF -----
+
