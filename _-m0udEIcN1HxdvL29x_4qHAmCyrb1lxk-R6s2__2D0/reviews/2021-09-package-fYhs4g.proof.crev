@@ -276,3 +276,42 @@ comment: |-
 zXxqKAsYnmM1Iy2zOgvcLVY5Ttrzlb5AGFKHasz3vlzTci87a8OfDyJbZiZUZhOwxihMIFR43pumQvz4PnigAQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-18T23:13:52.420754567+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: take_mut
+  version: 0.2.2
+  digest: JUynnuTS3tglX7Sb0vHUqHkX1PhGTrTtiMN4txyDA_w
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+issues:
+  - id: "https://github.com/Sgeo/take_mut/pull/10"
+    severity: medium
+    comment: Recovery closure leakage
+flags:
+  unmaintained: true
+alternatives:
+  - source: "https://crates.io"
+    name: replace_with
+comment: |-
+  While the idea of making a variable temporarily uninitialized may sound scary,
+  this crate takes necessary precaution to make this sound.
+  
+  Unfortunately, this crate has [a resource leak issue][1] that has been left
+  open for two years, hence the negative rating. The crate looks unmaintained -
+  the last commit is from 2018.
+  
+  [1]: https://github.com/Sgeo/take_mut/pull/10
+----- SIGN CREV PROOF -----
+V3p4bZRpya33XemP1jmCttHhD4PL2KYepc17s6ttV-jDI_l0RH5zYc-aay2wKsxZOpFICLfu83IPil-olXqGCg
+----- END CREV PROOF -----
+
