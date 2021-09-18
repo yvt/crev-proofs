@@ -232,3 +232,47 @@ comment: |-
 vQx1UTBqjPlBh1LLPF1Ra3Tjayde68pTDxZ-qdc1CDP2av2siDiWlCH8fPawDN5OXsJ7p4MMnwECqNfwL46mBQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-18T22:06:40.532021599+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: atomic_refcell
+  version: 0.1.7
+  revision: 5a1fe43c00e65a62ef88f86679eb7ff4b9334c32
+  digest: wD6S0aAbFNUNLkkbhflR3QT62Bt7dMWjCmiu6P-BxAo
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: neutral
+alternatives:
+  - source: "https://crates.io"
+    name: spin
+comment: |-
+  Basically `std::sync::RwLock` with panicking instead of blocking.
+  
+  `AtomicRefCell` uses atomic operations to manipulate the variable containing
+  the borrow state. Overall, the usage of atomic operations looks correct.
+  
+  # Minor issue
+  
+  The bounds for `AtomicRefCell<T>: Send` are [unnecessarily restrictive][1].
+  
+  `AtomicRefCell` aborts the program if a large number of immutable borrow
+  attempts are made while it's mutably borrowed. While a code comment claims
+  this is "very unlikely to happen in a real program", this can cause a problem
+  in a program that uses `AtomicRefCell` in a way unintended by
+  `atomic_refcell`'s authors and runs on a 32-bit target architecture.
+  [`spin`][2]`::RwLock` doesn't have this problem.
+  
+  [1]: https://github.com/bholley/atomic_refcell/issues/13
+  [2]: https://crates.io/crates/spin
+----- SIGN CREV PROOF -----
+zXxqKAsYnmM1Iy2zOgvcLVY5Ttrzlb5AGFKHasz3vlzTci87a8OfDyJbZiZUZhOwxihMIFR43pumQvz4PnigAQ
+----- END CREV PROOF -----
+
