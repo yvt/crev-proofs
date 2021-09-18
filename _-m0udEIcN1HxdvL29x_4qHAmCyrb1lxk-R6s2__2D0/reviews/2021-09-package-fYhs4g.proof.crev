@@ -137,3 +137,98 @@ comment: |-
 Rmi9P4beQyCVeQb6yGIpVgf1jXlObpdaWpMed0qeCEmHkRG17PHH2QXp29NZEe1uJcg6aVhcPEK-AssMHjjjAQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-18T12:01:54.372173567+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: atomic-option
+  version: 0.1.2
+  digest: NGWWOLFwqTtESjF8DNRBjS_1jZ7wIdV7pOr5x4cqV0I
+review:
+  thoroughness: high
+  understanding: medium
+  rating: negative
+issues:
+  - id: RUSTSEC-2020-0113
+    severity: high
+    comment: "Incorrect `Sync` bounds"
+  - id: "https://github.com/reem/rust-atomic-option/issues/3"
+    severity: high
+    comment: Underconstrained memory ordering
+flags:
+  unmaintained: true
+comment: |-
+  This crate provides an atomic cell type named `AtomicOption` to store
+  `Box<T>`.
+  
+  This crate is severely flawed and unsound but not malicious, hence the
+  negative rating.
+  
+  Marking as unmaintained because of several serious issues being left unfixed
+  for at least a year.
+  
+  # Major issues
+  
+  ## Underconstrained memory ordering
+  
+  `AtomicOption`'s methods allow the caller to specify memory orderings weaker
+  than what would be safe. Consider the following two processes:
+  
+  ```
+     // Process 1:
+  1  let mut boxed = Box::new(1);
+  2  *boxed = 2;
+  3  atom_opt.swap(boxed, Ordering::Relaxed);
+  
+                           // Process 2:
+                        4  let boxed = atom_opt.take(Ordering::Relaxed).unwrap();
+                        5  dbg!(*boxed);
+  ```
+  
+  Process 1 performs two writes on `*boxed` at line numbers 1 and 2. Supposing
+  Process 2 observes the `boxed` sent by Process 1 at line number 4, it performs
+  one read on `*boxed` at line number 5. Since the writes and read are not
+  ordered properly, the read [creates][5] an `undef` value.
+  
+  There's [a three year old GitHub issue][3] reporting this problem.
+  
+  ## Pointer-to-integer transmutation
+  
+  This crate uses pointer-to-integer transmutation, which has unresolved issues
+  regarding pointer provenance[1]. This could be safely avoided by replacing
+  the internally-used `AtomicUsize` with `AtomicPtr`.
+  
+  ## Incorrect `Sync` bounds
+  
+  `AtomicOption` unconditionally implements `Sync`, which allows `T: !Send` to
+  be sent to another thread through `&AtomicOption`. There's [a RustSec
+  advisory][2] regarding this issue.
+  
+  # Minor issues
+  
+  The documentation of the `unsafe fn` `AtomicOption::from_raw` doesn't describe
+  the safe usage.
+  
+  The use of `SeqCst` in `AtomicOption::drop` [suggests][4] the author's lack of
+  understanding in atomics and memory ordering.
+  
+  # Good things
+  
+  The crate is quite small as it contains only about 200 lines (including
+  comments) of Rust code.
+  
+  [1]: https://github.com/rust-lang/unsafe-code-guidelines/issues/286
+  [2]: https://rustsec.org/advisories/RUSTSEC-2020-0113.html
+  [3]: https://github.com/reem/rust-atomic-option/issues/3
+  [4]: https://github.com/rust-lang/nomicon/issues/166
+  [5]: https://llvm.org/docs/LangRef.html#memory-model-for-concurrent-operations
+----- SIGN CREV PROOF -----
+vQx1UTBqjPlBh1LLPF1Ra3Tjayde68pTDxZ-qdc1CDP2av2siDiWlCH8fPawDN5OXsJ7p4MMnwECqNfwL46mBQ
+----- END CREV PROOF -----
+
