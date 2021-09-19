@@ -316,3 +316,156 @@ comment: |-
 Yi8-sPmqzMi3-SgDqeF5-YPb4Hc9ovkK8y3UxWP5m6sbaQQUD1Y9oxT1ynL-z3zbpe9BsavxWp9VPOZZ3zAhDw
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-20T00:44:24.666158401+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: atomic-ref2
+  version: 0.2.1
+  digest: nO-r3XcgeXoQkbDbUWYoZJa5tpMLP4QWeIgaq4HQH8Y
+review:
+  thoroughness: high
+  understanding: medium
+  rating: negative
+issues:
+  - id: "https://github.com/mehcode/atomic-ref2-rs/issues/1"
+    severity: high
+    comment: "`Atomic[Option]Ref<T>` implements `Send + Sync` unconditionally"
+flags:
+  unmaintained: true
+alternatives:
+  - source: "https://crates.io"
+    name: crossbeam
+  - source: "https://crates.io"
+    name: atom
+comment: |-
+  This crate provides an atomic cell type to store `Option<Arc<T>>`.
+  
+  ## Major issues
+  
+  The bounds for `Atomic[Option]Ref<T>: Send + Sync` are unconstrained, which
+  allows thread-unsafe objects to be sent between threads, potentially leading
+  to data race.
+  
+  ## Minor issues
+  
+  The atomic operations in this crate are riddled with seemingly unnecessary
+  `Ordering::SeqCst`, which is [considered][1] by some (including myself) to be
+  a code smell.
+  
+  While most atomic operations in this crate are `SeqCst`, there are a few
+  places where `Relaxed` is used. Although stress-testing did not reveal any
+  problems, there's a theoretical soundness issue regarding the usage of
+  `Relaxed` as explained in the next section. It's very possible that the
+  excessive usage of `SeqCst` is why this issue doesn't seem to surface in
+  practice.
+  
+  ### Theoretical issue with the `Relaxed` memory ordering
+  
+  *Disclaimer: I'm not expert in the C++20 memory model, and therefore the
+  assessment presented here might be incorrect.*
+  
+  Shown below is a simplified code listing of `AtomicOptionRef`'s each method
+  with a syntax loosely inspired by [Promela][2]. Brackets indicate the memory
+  orderings for atomic operations (`[SC]` = `SeqCst`, `[]` = `Relaxed`).
+  
+  ```text
+      load(self):
+  10      [SC] (self.lock & WRITER_BIT) == 0 -> self.lock += 1
+  11      [SC] out = self.ptr
+  12      []   out.ref_count += 1
+  13      [SC] self.lock -= 1
+  14           return out
+  
+      swap(self, in)
+  20      [SC] (self.lock & WRITER_BIT) == 0 -> self.lock |= WRITER_BIT
+  21      []   self.lock == WRITER_BIT ->
+  22      [SC] (out, self.ptr) = (self.ptr, in)
+  23      []   self.lock = 0
+  24           return out
+  ```
+  
+  Suppose two threads execute the following sequences (multiple execution
+  instances of a single program line are distinguished by alphabetic suffixes):
+  
+   - T1: 20a, 21a, 22a, 23a, 24a, 20b, 21b, 22b, 23b, 24b
+   - T2: 10, 11, 12, 13, 14
+  
+  Also suppose that T2 observed the write performed by 23b at 10. The question
+  is, which `self.ptr` will T2 observe at 11? It would be unsafe to observe the
+  `self.ptr` written by 22a because that `self.ptr` is returned to the caller by
+  22b, and by the time 12 is executed, it might refer to an already-deallocated
+  memory region. For this unsafe case to manifest, the total order `S = [20a,
+  22a, 20b, 10, 11, 22b]` on `SeqCst` operations must be valid.
+  
+  ```text
+  
+                     ,--------------,
+                     |              |
+      T1: 20a  21a  22a  23a  24a  20b  21b  22b  23b  24b
+           |         |              |         ^    |
+           '---------'              |         |    |
+                                    |         |    | side-effect observed
+                                  S |,-------------'
+                                    ||        |
+                                    vv        |
+      T2:                           10        11
+                                    |         |
+                                    '---------' S
+  
+  Transitive reduction of the "(strongly|simply)? happens-before" relationship
+  
+      T1: 20a -> 21a -> 22a -> 23a -> 24a -> 20b -> 21b -> 22b -> 23b -> 24b
+                         |
+                         '----------------, SC-SC
+                                          |
+                                          v
+      T2:                          10 -> 11
+  
+    (Note: 23b doesn't (simply) happens-before 10 because 23b uses the `Relaxed`
+           ordering.)
+  
+  Transitive reduction of the "coherence-ordered" relationship
+  
+      T1: 20a -> 21a    22a    23a    24a    20b -> 21b    22b    23b    24b
+                  |      |     ^ |            ^      |      ^     ^ |
+     on self.lock '------|-----' '------------'      '------|-----' |
+                         |                                  |       |
+                         '----------------+-----------------'       |
+                    on self.ptr           |                         |
+                                    ,-----|-------------------------'
+                                    v     v
+      T2:                          10    11
+  
+  ```
+  
+  For this total order to be valid, it must be consistent with the "strongly
+  happen-before" relationship (C++ N4861 31.4 4) and the "coherence-ordered
+  relationship" on every object (C++ N4861 31.4 4.1). It's clear from the above
+  diagram that `S` meets this requirement.
+  
+  Furthermore, for 11 to observe the write by 22a, 22b must not happen-before
+  11, which is also met as shown in the above diagram.
+  
+  Therefore, it's possible for T2 to observe the write by 22a at 11, meaning,
+  during this method call, `AtomicOptionRef::load()` can clone `Arc<T>` that has
+  been previously returned by `AtomicOptionRef::swap()`, which can cause an
+  undefined behavior because it's possible that this `Arc<T>` is dropped by the
+  caller, and its control block doesn't exist anymore.
+  
+  ## Meta Issues
+  
+  The `homepage` field of the package metadata is incorrect. The correct URL is <https://github.com/mehcode/atomic-ref2-rs>.
+  
+  [1]: https://github.com/rust-lang/nomicon/issues/166
+  [2]: https://spinroot.com/spin/what.html
+----- SIGN CREV PROOF -----
+4hs8cP4r1pIEfGtsn5YM41xPD-gnmuH0budk6gjT-UA_R_hk9QFfJj_foXI4-woDPU1V7S8UzD4oBkf80tfECA
+----- END CREV PROOF -----
+
