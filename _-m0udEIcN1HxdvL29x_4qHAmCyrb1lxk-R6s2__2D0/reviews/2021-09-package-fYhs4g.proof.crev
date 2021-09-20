@@ -469,3 +469,44 @@ comment: |-
 4hs8cP4r1pIEfGtsn5YM41xPD-gnmuH0budk6gjT-UA_R_hk9QFfJj_foXI4-woDPU1V7S8UzD4oBkf80tfECA
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-20T01:59:13.756728432+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: atomic_ref
+  version: 0.2.1
+  revision: 2e94d6a88ca6b5abb2e1d284e7fce91319f56fc2
+  digest: 88O6OmeG8TwWsYfmmEzUg72nTKCPxeNOyZ8-W1J2Fig
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: positive
+advisories:
+  - ids:
+      - "https://github.com/mystor/atomic_ref/pull/6"
+    severity: high
+    comment: "Previous verions of `atomic_ref` have a bug in which `AtomicRef`'s\nmethods accept unsafe memory orderings."
+comment: |-
+  This crate provides an atomic cell to store `Option<&T>`.
+  
+  This crate is sound and has no known issues. `AtomicRef` has the correct trait
+  bounds for `Sync`/`Send`-ness and employs the minimum memory ordering to
+  make sure that, when a reference that was recently written through was stored
+  to an `AtomicRef`, whoever loads that reference is guaranteed to observe the
+  value written. (This requires acquire/release synchronization for all loads
+  and stores on `AtomicRef`. Without it, the reader could observe a stale value,
+  causing an undefined behavior. This was recently reported by [#5][1] and fixed
+  by [#6][2].)
+  
+  [1]: https://github.com/mystor/atomic_ref/issues/5
+  [2]: https://github.com/mystor/atomic_ref/pull/6
+----- SIGN CREV PROOF -----
+KpQTnVwFaeBc6-ggeZSzsVSTCadNu-gPa49MyzkvrFJcasDpCyyx9R1AedqYFRJLuXkMABqAib6F15tK0zwvDg
+----- END CREV PROOF -----
+
