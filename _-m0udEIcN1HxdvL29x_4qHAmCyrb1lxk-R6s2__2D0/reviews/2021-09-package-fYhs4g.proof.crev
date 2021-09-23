@@ -639,3 +639,32 @@ comment: |-
 T7BKQqWP9BREtp_U5PHRxVVxTmuMwg0EbTDLr2pSDI_o5gwYHajSwn7WGl8qIyX3y64QsnEPg97SkMpgHI3RCw
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T13:33:08.561774576+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: loquat
+  version: 0.0.1
+  revision: 0e6a7fdba9f05decca94f4b954d1b2331562ee4d
+  digest: goDdC9CfC1qqKaKTcLljCtsj-yR3qWa78qTGjS1gIew
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or making a point about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents. See my review on metaverse 0.0.1 for the list.
+  
+  This crate is not actively malicious. The description is misleading.
+----- SIGN CREV PROOF -----
+5DfnKGczM8usi6WCxue7KXJK0LfFRPL1ffSdw8hm_O-XPHJL7K1K4OooQN8nD6K2mSGLirTgzD_Z_SfhO2_9BQ
+----- END CREV PROOF -----
+
