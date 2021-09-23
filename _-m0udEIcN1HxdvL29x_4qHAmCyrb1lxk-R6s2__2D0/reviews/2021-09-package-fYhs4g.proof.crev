@@ -1428,3 +1428,32 @@ comment: |-
 ETb6bV6t4_xhNPg_DCcTwap8wsPkLs9Y5EFnEldLcrYwP2euoQIGBsNbTOvaBP3JER_q8QiPtObcOE0nAKY-Dw
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T16:35:19.459692892+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: lemon
+  version: 0.0.1
+  revision: e815f174bdc0ed8067371e7bea56d71ce08af363
+  digest: PnNGbbz7VvCLSPljw2d64yRuiBTBDp3yHe1rNFbTkWA
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or making a point about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents. See my review on metaverse 0.0.1 for a list of such crates.
+  
+  This crate is not actively malicious.
+----- SIGN CREV PROOF -----
+FTxJQ8PMxlja9hjM3B_cQbO6Fu0m_1ym9kvJwdLTxbYkF6efYU1VOJU4xLdwyd2jWzHjpsQuJChPUUmlHGRtAA
+----- END CREV PROOF -----
+
