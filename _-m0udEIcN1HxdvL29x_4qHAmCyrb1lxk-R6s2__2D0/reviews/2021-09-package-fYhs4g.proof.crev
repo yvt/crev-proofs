@@ -1254,3 +1254,32 @@ comment: |-
 wPGelW1nbLt3-PaRXYZpZE3YAgq_AWvYAzzyNjCLfWij0_ujO44zw_sdthfoqYgZaF7ROWWOXSxld121CVLHCw
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T16:34:16.195423632+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: gothic
+  version: 0.0.1
+  revision: cdeee893da081fd834daa578eea1cc29e9958549
+  digest: 0iID8H2U_X_E9irmDOFUI6RBnkcQb5G03e22gaTWskk
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or making a point about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents. See my review on metaverse 0.0.1 for a list of such crates.
+  
+  This crate is not actively malicious.
+----- SIGN CREV PROOF -----
+XJ9s6sikcKAwwK55Pm2fJFp81MJPkh3dzX60RHnUhFtVpEA_EtOWq89djB7Qhazvgiurp1OqN9LARGEyuWTsCA
+----- END CREV PROOF -----
+
