@@ -1457,3 +1457,43 @@ comment: |-
 FTxJQ8PMxlja9hjM3B_cQbO6Fu0m_1ym9kvJwdLTxbYkF6efYU1VOJU4xLdwyd2jWzHjpsQuJChPUUmlHGRtAA
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T16:35:37.462521362+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: metaverse
+  version: 0.0.1
+  revision: 44f36ffbccbe69e7d3c13d4162755578ac390618
+  digest: v_vBzWIY4lRqo0e-9hXawTFCZX4mbWzV3vyaJyF4mz0
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or [making a point][1] about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents:
+  
+   - <https://crates.io/crates/khipo/0.0.1>
+   - <https://crates.io/crates/hakuna/0.0.1>
+   - <https://crates.io/crates/matata/0.0.1>
+   - <https://crates.io/crates/metaverse/0.0.1>
+   - <https://crates.io/crates/loquat/0.0.1>
+   - <https://crates.io/crates/gothic/0.0.1>
+   - <https://crates.io/crates/lemon/0.0.1>
+   - <https://crates.io/crates/cupola/0.0.1>
+  
+  This crate is not actively malicious.
+  
+  [1]: https://docs.rs/crate/cupola/0.1.1
+----- SIGN CREV PROOF -----
+ZZAbt1V8CVq7pPBEADnSjcNTI3oO1umJno_ELhf6PcO-LKCEXKUbkhWjQKiJvd5ruJMUkxBjl3T7yIY1lI0rDA
+----- END CREV PROOF -----
+
