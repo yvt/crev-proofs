@@ -755,3 +755,32 @@ comment: |-
 WZhJaV19NH6PhdY_mTMKg582gMWIHe6PGrM7jRDHnK3bBSaBreLcRwWVQETMYcgIOsW9wAPnAbcKazeFRu1aAQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T13:38:12.006036685+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: khipo
+  version: 0.0.1
+  revision: 4a57b8f556ba5710f5a39f56b88b29067c7fa418
+  digest: 7bQt0CbQL08cpIKovjFFbYV-URCAmueUED06OMMVZbs
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or making a point about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents. See my review on metaverse 0.0.1 for a list of such crates.
+  
+  This crate is not actively malicious. The description is misleading.
+----- SIGN CREV PROOF -----
+lS7DZCI6XAol0083Rbj8u0G3EPnWyejDg6ck7KGRUszF3LjGjz-HIGwBecOb926sVVmdYm7jxkPzpTG0b2EVAA
+----- END CREV PROOF -----
+
