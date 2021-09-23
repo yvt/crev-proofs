@@ -1110,3 +1110,36 @@ comment: |-
 TtgJ2OAuKl7oY8KrgGMkXOMJN2r3sCcbFfTEPL4GuQuE2wiM1NeeEakwRLJD7S44A26p-VNVHYhsSiPI6mibAA
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T16:33:35.279405864+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: hiera
+  version: 0.0.1
+  revision: 6e91c8b02f6c311f6f0f999b46c3a35ecadd8170
+  digest: YaOXmJZ5PNL5REx8BlXRy-2mGCIRCZYFg45kk2fDUus
+review:
+  thoroughness: medium
+  understanding: high
+  rating: negative
+flags:
+  unmaintained: true
+comment: |-
+  This crate provides `crate::utils::Colo`, which is actually
+  [`vec_arena::Arena`][1] with all names replaced, doc comments stripped, and
+  copyright notices removed. The author released a series of crates with similar
+  contents. See my review on orano 0.0.1 for a list of such crates.
+  
+  This crate is not actively malicious.
+  
+  [1]: https://docs.rs/vec-arena/1.1.0/vec_arena/struct.Arena.html
+----- SIGN CREV PROOF -----
+kLVjptGRhmKxjS0KDaZ59cq7bm8R2yLrM1VGcs4bqLmsKiJ8XsdIVSvg0aZCKq7rPEgUmngMdZxZg1CNPV4xAg
+----- END CREV PROOF -----
+
