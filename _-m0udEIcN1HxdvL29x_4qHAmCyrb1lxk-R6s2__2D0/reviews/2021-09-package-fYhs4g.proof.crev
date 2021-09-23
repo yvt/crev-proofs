@@ -1341,3 +1341,32 @@ comment: |-
 tdXGWbQi5-nADCLyGC-jAU27uhOowX1hYIcsF0fhfS-2DpQXKeZ4H4CV6GeyP1vqFmF2tmrDO96iebFRRNrlDw
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T16:34:50.886130614+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: hakuna
+  version: 0.0.1
+  revision: 5ba46771805bbe975bfe4cc2db6f6e404b482a4a
+  digest: OHC4I61F1yQIH7a3vddnJsbBY5gEam1DjkpLnTzyhgo
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or making a point about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents. See my review on metaverse 0.0.1 for a list of such crates.
+  
+  This crate is not actively malicious.
+----- SIGN CREV PROOF -----
+POYqaHaHF5qNElZvWti2vpNatIBiawsBu0fsOLHBKAYl4jF4BkX1DNGQ1IykZFJWhpDkNxF40VqSBKf7t8QAAQ
+----- END CREV PROOF -----
+
