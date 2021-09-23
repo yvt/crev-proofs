@@ -610,3 +610,32 @@ comment: |-
 Na8TPXldJWtFDN7s2PtDznSCS8nTHczN4-gNtHi5BbaTq8Mm-5XmLvimQW05H4e3bbgAtU9NvsbTDBtBmh4WCQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-09-23T13:32:38.248260934+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: matata
+  version: 0.0.1
+  revision: 886414c69bcdae1b2eaa30d2267ed1e908c1585a
+  digest: Zj9hGaQo_95vnqRQ9TJsFPzOcV0enMNeW7X0Mq9KcMk
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: negative
+comment: |-
+  This crate doesn't seem to do anything useful, and its intent is unclear, but
+  probably it's for name-squatting or making a point about the lack of
+  name-squatting policy. The author released a series of crates with similar
+  contents. See my review on metaverse 0.0.1 for the list.
+  
+  This crate is harmless.
+----- SIGN CREV PROOF -----
+T7BKQqWP9BREtp_U5PHRxVVxTmuMwg0EbTDLr2pSDI_o5gwYHajSwn7WGl8qIyX3y64QsnEPg97SkMpgHI3RCw
+----- END CREV PROOF -----
+
