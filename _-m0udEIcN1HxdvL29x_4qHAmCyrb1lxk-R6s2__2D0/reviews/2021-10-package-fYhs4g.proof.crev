@@ -35,3 +35,40 @@ comment: |-
 eDCE6Zo727k-iPxMwDuNy-vCYHhS6KzVhnDumMnUGTHSFvM2RBqSAApu6sWc-3Rxu6yT0NKKjtc-Y2Fx7gjiDQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-10-03T21:36:40.511144379+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: constant
+  version: 0.2.0
+  digest: LoCpfCGH7_JRrW44PTzM047iz_STwUij5KfRES50L1U
+review:
+  thoroughness: medium
+  understanding: high
+  rating: positive
+comment: |-
+  This crate provides a trait to specify a type's default value by an associated
+  constant.
+  
+  It provides trait implementations for types from `std`, which are mostly
+  reasonable. Some are just `const` version of their respective `Default`
+  implementation. `MaybeUninit` and `Result` are the counterexamples, where
+  opinionated decisions are made. To elaborate, `MaybeUninit<T>`'s default value
+  could be `Self::uninit()` or `Self::new(T::default())`. So the standard
+  library chooses neither, whereas this crate implements `Constdef` using the
+  former. The users of this crate (particularly its `derive` macro) might want
+  to watch out for such cases and check that intended default values are indeed
+  created.
+  
+  This crate re-exports a procedural macro from `const_internals`, which is not
+  covered by this review.
+----- SIGN CREV PROOF -----
+PL5hNeqWqxWiz7ywX2kwAhBh0F-ASaXxbAcG6cZPnWpzdrD5QxVHtdQ75s19vK1El2gvyQRGYUO-57tDYKh4Cg
+----- END CREV PROOF -----
+
