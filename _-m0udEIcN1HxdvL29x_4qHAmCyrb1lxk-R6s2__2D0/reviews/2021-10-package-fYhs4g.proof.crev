@@ -1,0 +1,37 @@
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-10-03T21:22:31.992040076+09:00"
+from:
+  id-type: crev
+  id: _-m0udEIcN1HxdvL29x_4qHAmCyrb1lxk-R6s2__2D0
+  url: "https://github.com/yvt/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: algorithmica
+  version: 0.1.9
+  revision: 187829bf8ac4f8a8e73a0c795f74db011039ecac
+  digest: XN6m41BGhsWk2afmA2m4K_V7uHKwwwubqQTcMNsYYy4
+review:
+  thoroughness: none
+  understanding: low
+  rating: negative
+issues:
+  - id: "https://rustsec.org/advisories/RUSTSEC-2021-0053.html"
+    severity: high
+    comment: ""
+comment: |-
+  This is a kitchen-sink crate that provides implementations for many well-known
+  algorithms.
+  
+  `algorithmica::sort::merge_sort` provides unsound functions. This issue was
+  reported by [the GitHub issue #1][1] and [an advisory][2] issued on Mar 7,
+  2021. The author closed the issue on Jun 16 without providing any explanations
+  or fixes.
+  
+  [1]: https://github.com/AbrarNitk/algorithmica/issues/1
+  [2]: https://rustsec.org/advisories/RUSTSEC-2021-0053.html
+----- SIGN CREV PROOF -----
+eDCE6Zo727k-iPxMwDuNy-vCYHhS6KzVhnDumMnUGTHSFvM2RBqSAApu6sWc-3Rxu6yT0NKKjtc-Y2Fx7gjiDQ
+----- END CREV PROOF -----
+
